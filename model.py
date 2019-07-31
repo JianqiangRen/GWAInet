@@ -39,6 +39,8 @@ class GWAInet(object):
         
         self.input_g_p_warped = utils.tf_warp3(self.input_g_p, self.flow_field_t, 256, 256)
  
+        print(self.input_p)
+        print(self.input_g_p_warped)
         self.g_output = self.model_guidance_9(self.input_p, self.input_g_p_warped, False)
 
         with tf.variable_scope('deprocessing'):
@@ -56,6 +58,12 @@ class GWAInet(object):
         if not os.path.exists(self.args.result_dir+'/sr'):
             os.makedirs(self.args.result_dir+'/sr')
         print("Done building!")
+
+    def set_test_data_img(self,x, xg):
+        self.x_test = [x]
+        self.y_test = [x]
+        self.xg_test =[xg]
+        self.num_test_image = len(self.xg_test)
 	
     def set_test_data(self):
         self.x_test=list(np.load(self.args.npy_test_LR_path))
