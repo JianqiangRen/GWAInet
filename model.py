@@ -83,16 +83,21 @@ class GWAInet(object):
      
     def print_test(self):        
         num_test=self.num_test_image
-    
+        print('num_test:{}'.format(num_test))
         i = 0
         count=0
         while i<num_test:
             j = min(i + self.args.batch_size, num_test)
                 
-            x,y,x_g,x_u,window=self.get_batch_test()
-            output=self.predict(np.asarray(x),np.asarray(x_g),np.asarray(x_u))           
-
-            for k in range(j-i):        
+            x, y, x_g, x_u, window =self.get_batch_test()
+            print('x {}'.format(len(x)))
+            print('x_g {}'.format(len(x_g)))
+            print('x_u {}'.format(len(x_u)))
+            output=self.predict(np.asarray(x),np.asarray(x_g),np.asarray(x_u))
+            
+            for k in range(j-i):
+                scipy.misc.imsave(self.args.result_dir + '/sr/' + str(count) + '_x.png', np.asarray(x[k]))
+                scipy.misc.imsave(self.args.result_dir + '/sr/' + str(count) + '_xg.png', np.asarray(x_g[k]))
                 scipy.misc.imsave(self.args.result_dir+'/sr/'+str(count)+'.png', output[k])
                 count=count+1
             i = j
@@ -243,4 +248,4 @@ class GWAInet(object):
          
         self.w_variables = tf.get_collection(
             tf.GraphKeys.TRAINABLE_VARIABLES, scope='warper')
-        return x 
+        return x

@@ -5,11 +5,11 @@ import numpy as np
 
 args=Namespace()
 
-checkpoint='/GWAInet_test/checkpoint/model.ckpt-54000'
-args.npy_test_HR_path='/GWAInet_test/y_sample.npy'
-args.npy_test_LR_path='/GWAInet_test/x_sample.npy'
-args.npy_test_GHR_path='/GWAInet_test/xg_sample.npy'
-args.result_dir='/results'
+checkpoint='./GWAInet_test/checkpoint/model.ckpt-54000'
+args.npy_test_HR_path='./GWAInet_test/y_sample.npy'
+args.npy_test_LR_path='./GWAInet_test/x_sample.npy'
+args.npy_test_GHR_path='./GWAInet_test/xg_sample.npy'
+args.result_dir='./results'
 
 args.training_LR_RGB_mean=np.array([130.98089974, 106.99848177, 94.87540804])
 args.training_HR_RGB_mean=np.array([130.99337721, 107.01429743, 94.89514401])
